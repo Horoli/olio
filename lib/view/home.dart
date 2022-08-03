@@ -8,8 +8,11 @@ class ViewHome extends StatefulWidget {
 }
 
 class _ViewHomeState extends State<ViewHome> {
+  late Future<LottoInfo> futrueLotto;
+  //
   @override
   Widget build(BuildContext context) {
+    //
     return Scaffold(
       appBar: AppBar(
         title: const Text('lotto'),
@@ -39,6 +42,7 @@ class _ViewHomeState extends State<ViewHome> {
             buildListView(lotto.lottoThird).expand(),
             buildListView(lotto.lottoFourth).expand(),
             buildListView(lotto.lottoFifth).expand(),
+            buildFutureLotto().expand(),
           ],
         ),
       ),
@@ -90,5 +94,33 @@ class _ViewHomeState extends State<ViewHome> {
         );
       },
     );
+  }
+
+  Widget buildFutureLotto() {
+    return FutureBuilder<LottoInfo>(
+      future: futrueLotto,
+      builder: (BuildContext context, snapshot) {
+        //
+        if (snapshot.hasData) {
+          return Text('${snapshot.data!.bnusNo}');
+          //
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+        //
+        return Container();
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    futrueLotto = fetchLotto();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
