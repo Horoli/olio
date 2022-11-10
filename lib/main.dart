@@ -10,7 +10,9 @@ void main() {
 
 class AppRoot extends StatelessWidget {
   final Map<String, Widget Function(BuildContext)> routes = {
-    ROUTER.HOME: (BuildContext context) => ViewHome()
+    ROUTER.HOME: (BuildContext context) => ViewHome(),
+    // ROUTER.LOTTO: (BuildContext context) => ViewLotto(),
+    // ROUTER.CONVERT: (BuildContext context) => ViewConvertText(),
   };
 
   @override

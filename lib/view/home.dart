@@ -1,4 +1,4 @@
-part of '../../common.dart';
+part of '/common.dart';
 
 class ViewHome extends StatefulWidget {
   const ViewHome({Key? key}) : super(key: key);
@@ -8,119 +8,39 @@ class ViewHome extends StatefulWidget {
 }
 
 class _ViewHomeState extends State<ViewHome> {
-  late Future<LottoInfo> futrueLotto;
+  int selectedIndex = 1;
+
+  final List<Widget> bottomNavigationButton = [
+    // ViewHome(),
+    ViewLotto(),
+    ViewConvertText(),
+  ];
   //
+  void bottomNavigationButtonTap(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+  //
+
   @override
   Widget build(BuildContext context) {
-    //
     return Scaffold(
       appBar: AppBar(
-        title: const Text('lotto'),
+        title: const Text('horoli'),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(5),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container().expand(),
-                const Padding(padding: EdgeInsets.all(5)),
-                ElevatedButton(
-                  child: const Text('Create LottoNumber'),
-                  onPressed: () {
-                    setState(() {
-                      lotto.createNumber();
-                    });
-                  },
-                ).expand(),
-                const Padding(padding: EdgeInsets.all(5)),
-                Container().expand()
-              ],
-            ).expand(),
-            buildListView(lotto.lottoFirst).expand(),
-            buildListView(lotto.lottoSecond).expand(),
-            buildListView(lotto.lottoThird).expand(),
-            buildListView(lotto.lottoFourth).expand(),
-            buildListView(lotto.lottoFifth).expand(),
-            buildFutureLotto().expand(),
-          ],
-        ),
+      body: SafeArea(
+        child: bottomNavigationButton.elementAt(selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          // BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'home'),
+          BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'lotto'),
+          BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'convert'),
+        ],
+        currentIndex: selectedIndex,
+        onTap: bottomNavigationButtonTap,
       ),
     );
-  }
-
-  Widget buildListView(List<int> lottoList) {
-    return ListView.builder(
-      shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
-      itemCount: lottoList.length,
-      itemBuilder: (BuildContext context, int index) {
-        Color basicColor = Colors.white;
-        if (lottoList[index] <= 10) {
-          basicColor = Colors.amber;
-        }
-
-        if (10 < lottoList[index] && lottoList[index] <= 20) {
-          basicColor = Colors.green;
-        }
-
-        if (20 < lottoList[index] && lottoList[index] <= 30) {
-          basicColor = Colors.grey;
-        }
-
-        if (30 < lottoList[index] && lottoList[index] <= 40) {
-          basicColor = const Color(0xFFCBE0EB);
-        }
-
-        if (40 < lottoList[index] && lottoList[index] <= 50) {
-          basicColor = const Color(0xFFC3A9EE);
-        }
-
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            alignment: Alignment.center,
-            width: 100,
-            decoration: BoxDecoration(
-              color: basicColor,
-              border: Border.all(),
-            ),
-            padding: const EdgeInsets.all(5),
-            child: Text(
-              '${lottoList[index]}',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget buildFutureLotto() {
-    return FutureBuilder<LottoInfo>(
-      future: futrueLotto,
-      builder: (BuildContext context, snapshot) {
-        //
-        if (snapshot.hasData) {
-          return Text('${snapshot.data!.bnusNo}');
-          //
-        } else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
-        }
-        //
-        return Container();
-      },
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    futrueLotto = fetchLotto();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

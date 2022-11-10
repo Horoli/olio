@@ -13,7 +13,15 @@ dependencies:
   flutter:
     sdk: flutter
     
+  tnd_core:
+    git:
+      url: 'https://git.technolda.com/Technolda/tnd_core.git'
+      ref: v2
 
+  tnd_pkg_widget:
+    git:
+      url: 'https://git.technolda.com/Technolda/tnd_pkg_widget.git'
+      ref: v2
 
   cupertino_icons: ^1.0.2
 
