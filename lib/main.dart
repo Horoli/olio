@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:first/common.dart';
+import 'package:olio/common.dart';
 
 import 'common.dart';
 import 'preset/router.dart' as ROUTER;
+import 'preset/color.dart' as COLOR;
 
 void main() {
   runApp(AppRoot());

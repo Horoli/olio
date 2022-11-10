@@ -14,6 +14,8 @@ import 'package:http/http.dart' as http;
 // preset
 // import 'package:first/preset/router.dart' as ROUTER;
 import 'package:olio/preset/router.dart' as ROUTER;
+import 'package:olio/preset/color.dart' as COLOR;
+
 import 'package:tnd_core/tnd_core.dart';
 import 'package:tnd_pkg_widget/tnd_pkg_widget.dart';
 
