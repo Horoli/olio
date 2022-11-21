@@ -172,6 +172,10 @@ class _ViewConvertTextState extends State<ViewConvertText> {
           child: SelectableText(
             text,
             showCursor: true,
+
+            // onTap: () {
+            // Clipboard.setData(ClipboardData(text: $text.lastValue));
+            // },
           ),
         );
       },

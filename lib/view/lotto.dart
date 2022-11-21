@@ -37,7 +37,7 @@ class _ViewLottoState extends State<ViewLotto> {
           buildListView(lotto.lottoThird).expand(),
           buildListView(lotto.lottoFourth).expand(),
           buildListView(lotto.lottoFifth).expand(),
-          buildFutureLotto().expand(),
+          // buildFutureLotto().expand(),
         ],
       ),
     );
@@ -91,6 +91,7 @@ class _ViewLottoState extends State<ViewLotto> {
   }
 
   Widget buildFutureLotto() {
+    print('futureLotto $futureLotto');
     return FutureBuilder<LottoInfo>(
       future: futureLotto,
       builder: (BuildContext context, snapshot) {
