@@ -110,8 +110,15 @@ class _ViewConvertTextState extends State<ViewConvertText> {
       ),
       child: Text(label, style: const TextStyle(color: COLOR.GREY)),
       onPressed: () {
-        String convertText = ctrText.text.replaceAll(exp, '');
-        $text.sink$(convertText);
+        if (ctrText.text.length < 5) {
+          showSnackBar('5자 이상 입력하세요.');
+          return;
+        }
+        if (ctrText.text.length >= 5) {
+          String convertText = ctrText.text.replaceAll(exp, '');
+          $text.sink$(convertText);
+          return;
+        }
       },
     );
   }
@@ -124,12 +131,12 @@ class _ViewConvertTextState extends State<ViewConvertText> {
       ),
       child: Text(label, style: const TextStyle(color: COLOR.GREY)),
       onPressed: () {
-        print($text.lastValue.length);
-        if ($text.lastValue.length < 10) {
-          showSnackBar('10자 이상 입력하세요.');
+        if ($text.lastValue.length < 5) {
+          showSnackBar('5자 이상 입력하세요.');
+          return;
         }
 
-        if ($text.lastValue.length > 10) {
+        if ($text.lastValue.length >= 5) {
           Clipboard.setData(ClipboardData(text: $text.lastValue));
           showSnackBar('copy complete');
         }
@@ -162,7 +169,10 @@ class _ViewConvertTextState extends State<ViewConvertText> {
             color: Colors.white,
             border: Border.all(color: Colors.grey),
           ),
-          child: Text('$text'),
+          child: SelectableText(
+            text,
+            showCursor: true,
+          ),
         );
       },
     );

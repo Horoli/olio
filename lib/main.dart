@@ -20,6 +20,7 @@ class AppRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     //
     return MaterialApp(
+      title: 'olio',
       initialRoute: ROUTER.HOME,
       routes: routes,
     );
